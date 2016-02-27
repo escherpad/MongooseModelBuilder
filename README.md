@@ -8,7 +8,10 @@ Have you ever wished that there is a way to write Mongoose schemas like a config
 say we want to build a new mongoose schema:
 
 ```javascript
+// mongoose is not needed here. It is required via the singleton pattern.
 var mongoose = require('mongoose');
+var ModelBuilder = require('mongoose-model-builder');
+var SchemaBuilder = ModelBuilder.SchemaBuilder;
 var map = require('lodash/map'); // require lodash 4.0.0<5.0.0. For <4.0.0 you need `require('lodash/collection/map');
 var subSchemaConfig = {
     resourcePrototype: {
@@ -36,7 +39,11 @@ should.not.exist(subSchema.resourcePrototype.__options__);
 #### To Build A Mongoose Model
 
 ```javascript
+// mongoose is not needed here. It is required via the singleton pattern.
 var mongoose = require('mongoose');
+var ModelBuilder = require('mongoose-model-builder');
+var SchemaBuilder = ModelBuilder.SchemaBuilder;
+
 var map = require('lodash/map'); // require lodash 4.0.0<5.0.0. For <4.0.0 you need `require('lodash/collection/map');
 
 var schemaConfig = {
