@@ -1,6 +1,8 @@
 /** Created by ge on 2/26/16. */
 "use strict";
-var pluck = require('lodash/object/pluck');
+var mongoose = require('mongoose');
+var each = require('lodash/each');
+var capitalize = require('lodash/capitalize');
 
 function SchemaBuilder(schema, title) {
     var ModelSchema, methods, virtuals, options, indexConfig, pluginConfig;
@@ -28,7 +30,7 @@ function SchemaBuilder(schema, title) {
         delete schema.__plugin__;
     }
 
-    var settings, ensureIndexes;
+    var settings;
     if (options) {
         settings = {collection: title};
         if (options._id === false) {
@@ -43,17 +45,17 @@ function SchemaBuilder(schema, title) {
     }
 
     if (pluginConfig) {
-        _.each(pluginConfig, function (pluginConf) {
+        each(pluginConfig, function (pluginConf) {
             ModelSchema.plugin(pluginConf);
         });
     }
     if (methods) {
-        _.each(methods, function (method, methodKey) {
+        each(methods, function (method, methodKey) {
             ModelSchema.methods[methodKey] = method;
         });
     }
     if (virtuals) {
-        _.each(virtuals, function (virtual, virtualKey) {
+        each(virtuals, function (virtual, virtualKey) {
             if (virtualKey.slice(-3) == 'Set') {
                 ModelSchema.virtual(virtualKey.slice(0, -3)).set(virtual);
             } else if (virtualKey.slice(-3) == 'Get') {
@@ -64,13 +66,13 @@ function SchemaBuilder(schema, title) {
         });
     }
     if (options) {
-        _.each(options, function (option, optionKey) {
+        each(options, function (option, optionKey) {
             ModelSchema.set(optionKey, option);
         });
     }
     if (indexConfig) {
         /** allow creation of multiple multifield indexes */
-        _.each(indexConfig, function (indConf) {
+        each(indexConfig, function (indConf) {
             var indexOptions;
             if (indConf.__options__) {
                 indexOptions = indConf.__options__;
@@ -93,6 +95,7 @@ function ModelBuilder(schema, title) {
             if (err) return console.log('ensureIndex error:', err)
         })
     }
+    return Model;
 }
 
 ModelBuilder.SchemaBuilder = SchemaBuilder;

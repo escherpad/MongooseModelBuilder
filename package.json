@@ -1,0 +1,36 @@
+{
+  "name": "mongoose-model-builder",
+  "version": "1.0.0",
+  "description": "a config object based model builder for mongoose",
+  "main": "ModelBuilder.js",
+  "scripts": {
+    "test": "mocha ./ModelBuilder.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escherpad/MongooseModelBuilder.git"
+  },
+  "keywords": [
+    "Mongoose",
+    "mongoose",
+    "model",
+    "mongoose",
+    "schema",
+    "model",
+    "builder"
+  ],
+  "author": "Ge Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/escherpad/MongooseModelBuilder/issues"
+  },
+  "homepage": "https://github.com/escherpad/MongooseModelBuilder#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "mongoose": "^4.4.5",
+    "should": "^8.2.2"
+  },
+  "dependencies": {
+    "lodash": "^4.5.1"
+  }
+}
